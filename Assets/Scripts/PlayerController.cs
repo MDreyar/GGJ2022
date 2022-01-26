@@ -4,22 +4,25 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour {
-    public float speed = 1;
-    public float jumpSpeed = 5;
+    [Header("Speed settings")]
+    public float MaxSpeed = 9;
+    public float accelerationRate = 13;
+    public float decelertionRate = 16;
+    public float velPow = 0.96f;
+    public float frictionAmount = 0.2f;
+
+    [Header("Jump settings")]
+    public Transform groundCheckBoxLocation;
+    public Vector2 groundCheckBoxSize;
+    public LayerMask GroundLayers;
+    public float jumpForce = 5;
+    public float coyoteTime = 0.15f; 
 
     Rigidbody2D rb;
     InputActions input;
+    float lastGroundedTime;
 
-    bool shouldJump = false;
-
-
-    bool isGrounded {
-        get {
-            bool hit = Physics2D.BoxCast(new Vector2(rb.position.x, rb.position.y - 0.5f), Vector2.one, 0, Vector2.down, 0.3f, LayerMask.GetMask("Foreground"));
-            Debug.DrawRay(new Vector2(rb.position.x, rb.position.y - 0.5f), Vector2.down, hit ? Color.green : Color.red);
-            return hit;
-        }
-    }
+    bool isGrounded => Physics2D.OverlapBox(groundCheckBoxLocation.position, groundCheckBoxSize, 0, GroundLayers);
 
     void Awake() {
         rb = GetComponent<Rigidbody2D>();
@@ -27,20 +30,46 @@ public class PlayerController : MonoBehaviour {
     }
 
     void OnEnable() {
+        input.Default.Jump.performed += Jump;
         input.Default.Enable();
     }
 
-    void Update() {
-        if (!shouldJump && isGrounded) {
-            shouldJump = input.Default.Jump.WasPerformedThisFrame();
+    void OnDisable() {
+        input.Default.Jump.performed -= Jump;
+        input.Default.Disable();
+    }
+
+    private void Jump(InputAction.CallbackContext obj) {
+        if (lastGroundedTime > 0) {
+            rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
         }
     }
 
+    private void Update() {
+        lastGroundedTime -= Time.deltaTime;
+
+        if (isGrounded)
+            lastGroundedTime = coyoteTime;
+    }
+
     void FixedUpdate() {
-        var movement = input.Default.SidewaysMovement.ReadValue<float>();
+        var moveInput = input.Default.SidewaysMovement.ReadValue<float>();
 
-        rb.velocity = new Vector2(movement * speed, shouldJump ? jumpSpeed : rb.velocity.y);
+        float targetSpeed = moveInput * MaxSpeed;
+        float speedDiff = targetSpeed - rb.velocity.x;
+        float acceleration = (Mathf.Abs(targetSpeed) > 0.01f) ? accelerationRate : decelertionRate;
+        float movement = Mathf.Pow(Mathf.Abs(speedDiff) * acceleration, velPow) * Mathf.Sign(speedDiff);
+        rb.AddForce(movement * Vector2.right);
 
-        shouldJump = false;
+        if(isGrounded && !input.Default.SidewaysMovement.inProgress) {
+            float amount = Mathf.Min(Mathf.Abs(rb.velocity.x), Mathf.Abs(frictionAmount));
+            amount *= Mathf.Sign(rb.velocity.x);
+            rb.AddForce(Vector2.right * -amount, ForceMode2D.Impulse);
+        }
+    }
+
+    private void OnDrawGizmosSelected() {
+        Gizmos.color = isGrounded ? Color.green : Color.red;
+        Gizmos.DrawCube(groundCheckBoxLocation.position, groundCheckBoxSize);
     }
 }
