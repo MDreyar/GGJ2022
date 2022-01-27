@@ -134,7 +134,7 @@ GameObject:
   - component: {fileID: 10934627}
   - component: {fileID: 10934629}
   - component: {fileID: 10934628}
-  m_Layer: 8
+  m_Layer: 7
   m_Name: Platform
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -256,7 +256,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 361108605}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -1.09, z: 0}
+  m_LocalPosition: {x: 0, y: -1.055, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1460100327}
@@ -273,7 +273,7 @@ GameObject:
   - component: {fileID: 523000497}
   - component: {fileID: 523000496}
   - component: {fileID: 523000495}
-  m_Layer: 8
+  m_Layer: 7
   m_Name: Square
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -416,7 +416,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_TrackedObjectOffset: {x: 0, y: 0, z: 0}
-  m_LookaheadTime: 0
+  m_LookaheadTime: 0.101
   m_LookaheadSmoothing: 0
   m_LookaheadIgnoreY: 0
   m_XDamping: 1
@@ -468,7 +468,7 @@ GameObject:
   m_Component:
   - component: {fileID: 707959786}
   - component: {fileID: 707959785}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: Square
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -555,7 +555,7 @@ GameObject:
   - component: {fileID: 1460100329}
   m_Layer: 6
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -635,21 +635,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 1460100326}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bedf7e1acab031543971825d29e72377, type: 3}
+  m_Script: {fileID: 11500000, guid: a50ab8fad9e51a34ca84497c8aa7810d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxSpeed: 9
-  accelerationRate: 13
-  decelertionRate: 16
-  velPow: 0.96
-  frictionAmount: 0.2
-  groundCheckBoxLocation: {fileID: 361108606}
-  groundCheckBoxSize: {x: 0.73, y: 0.1}
-  GroundLayers:
+  data: {fileID: 11400000, guid: c00d4a91d80e5e6418bff3c0edab998b, type: 2}
+  rb: {fileID: 0}
+  CurrentState: 
+  groundCheckPoint: {fileID: 361108606}
+  groundCheckSize: {x: 0.8, y: 0.1}
+  groundLayer:
     serializedVersion: 2
-    m_Bits: 256
-  jumpForce: 15
-  coyoteTime: 0.15
+    m_Bits: 128
 --- !u!50 &1460100330
 Rigidbody2D:
   serializedVersion: 4
@@ -664,8 +660,8 @@ Rigidbody2D:
   m_UseAutoMass: 0
   m_Mass: 1
   m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 1.75
+  m_AngularDrag: 0
+  m_GravityScale: 1
   m_Material: {fileID: 6200000, guid: 8c45e143920b1f340bc7aec6e240606e, type: 2}
   m_Interpolate: 1
   m_SleepingMode: 0
@@ -696,7 +692,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1486254503}
-  m_Layer: 8
+  m_Layer: 7
   m_Name: Map
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -992,7 +988,7 @@ GameObject:
   - component: {fileID: 1957132798}
   - component: {fileID: 1957132800}
   - component: {fileID: 1957132799}
-  m_Layer: 8
+  m_Layer: 7
   m_Name: Platform (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
