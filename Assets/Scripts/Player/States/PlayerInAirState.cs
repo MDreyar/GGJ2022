@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerInAirState : PlayerState {
+    public int DoubleJumpCharges { get; private set; }
+
     public PlayerInAirState(PlayerController player, StateMachine stateMachine, PlayerData data) : base(player, stateMachine, data) { }
 
     public override void Exit() {
@@ -20,7 +22,11 @@ public class PlayerInAirState : PlayerState {
             } else {
                 stateMachine.ChangeState(player.idleState);
             }
-        } else if (player.rb.velocity.y < 0) {
+        }else if(player.LastPressedJumpTime > 0 && DoubleJumpCharges > 0) {
+            stateMachine.ChangeState(player.jumpState);
+            DoubleJumpCharges--;
+        } 
+        else if (player.rb.velocity.y < 0) {
             player.SetGravityScale(data.gravityScale * data.fallGravityMult);
         }
     }
@@ -29,5 +35,9 @@ public class PlayerInAirState : PlayerState {
         base.PhysicsUpdate();
 
         player.Run();
+    }
+
+    public void ResetJumpCharges() {
+        DoubleJumpCharges = data.doubleJumpCharges;
     }
 }

@@ -20,6 +20,7 @@ public class PlayerController : MonoBehaviour {
 
     public float LastOnGroundTime { get; private set; }
     public float LastPressedJumpTime { get; private set; }
+    public int DoubleJumpCharges { get; private set; }
 
     [SerializeField] Transform groundCheckPoint;
     [SerializeField] Vector2 groundCheckSize;

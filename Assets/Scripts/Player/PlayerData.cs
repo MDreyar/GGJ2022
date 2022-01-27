@@ -21,6 +21,7 @@ public class PlayerData : ScriptableObject
     [Header("Jump")]
     public float jumpForce;
     public float jumpCutMultiplier;
+    public int doubleJumpCharges;
     public float coyoteTime;
     public float jumpBufferTime;
 }
