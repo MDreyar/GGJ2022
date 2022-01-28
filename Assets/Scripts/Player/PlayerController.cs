@@ -5,10 +5,11 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour {
     [SerializeField] PlayerData data;
-    [SerializeField] GameObject KillMask;
-    public InputActions Input { get; private set; }
 
+    public InputActions Input { get; private set; }
     public Rigidbody2D rb;
+    public Animator animator;
+    private SpriteRenderer renderer;
 
     #region State machine
     public string CurrentState;
@@ -17,10 +18,12 @@ public class PlayerController : MonoBehaviour {
     public PlayerRunState runState;
     public PlayerJumpState jumpState;
     public PlayerInAirState airState;
+    public PlayerWaterDrawState waterDrawState;
     #endregion
 
     public float LastOnGroundTime { get; private set; }
     public float LastPressedJumpTime { get; private set; }
+    public float LastPressedWaterDrawTime { get; private set; }
 
     [SerializeField] Transform groundCheckPoint;
     [SerializeField] Vector2 groundCheckSize;
@@ -30,6 +33,8 @@ public class PlayerController : MonoBehaviour {
         Input = new InputActions();
 
         rb = GetComponent<Rigidbody2D>();
+        renderer = GetComponent<SpriteRenderer>();
+        animator = GetComponent<Animator>();
 
         #region State machine
         stateMachine = new StateMachine();
@@ -37,6 +42,7 @@ public class PlayerController : MonoBehaviour {
         runState = new PlayerRunState(this, stateMachine, data);
         jumpState = new PlayerJumpState(this, stateMachine, data);
         airState = new PlayerInAirState(this, stateMachine, data);
+        waterDrawState = new PlayerWaterDrawState(this, stateMachine, data);
         #endregion
     }
 
@@ -60,9 +66,17 @@ public class PlayerController : MonoBehaviour {
     private void Update() {
         LastOnGroundTime -= Time.deltaTime;
         LastPressedJumpTime -= Time.deltaTime;
+        LastPressedWaterDrawTime -= Time.deltaTime;
 
         if (Physics2D.OverlapBox(groundCheckPoint.position, groundCheckSize, 0, groundLayer))
             LastOnGroundTime = data.coyoteTime;
+
+        if(Mathf.Abs(rb.velocity.x) >= 0.01f) {
+            if (rb.velocity.x < 0)
+                renderer.flipX = true;
+            else
+                renderer.flipX = false;
+        }
 
         stateMachine.CurrentState.LogicUpdate();
     }
@@ -72,13 +86,15 @@ public class PlayerController : MonoBehaviour {
     }
     #endregion
 
+    #region Input Events
     private void OnJump(InputAction.CallbackContext context) {
         LastPressedJumpTime = data.jumpBufferTime;
     }
 
     private void OnKill(InputAction.CallbackContext context) {
-        Instantiate(KillMask, rb.position, Quaternion.identity);
+        LastPressedWaterDrawTime = data.waterDrawBufferTime;
     }
+    #endregion
 
     #region Movement
     public void SetGravityScale(float scale) {

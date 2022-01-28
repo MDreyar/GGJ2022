@@ -7,6 +7,13 @@ public class PlayerInAirState : PlayerState {
 
     public PlayerInAirState(PlayerController player, StateMachine stateMachine, PlayerData data) : base(player, stateMachine, data) { }
 
+
+    public override void Enter() {
+        base.Enter();
+
+        player.animator.Play("Fall Down");
+    }
+
     public override void Exit() {
         base.Exit();
 
@@ -19,6 +26,8 @@ public class PlayerInAirState : PlayerState {
         if (player.LastOnGroundTime > 0) {
             if (player.LastPressedJumpTime > 0) {
                 stateMachine.ChangeState(player.jumpState);
+            } else if(Mathf.Abs(player.rb.velocity.x) >= 0.01f) {
+                stateMachine.ChangeState(player.runState);
             } else {
                 stateMachine.ChangeState(player.idleState);
             }

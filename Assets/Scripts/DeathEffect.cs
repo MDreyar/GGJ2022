@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Cinemachine;
 
 public class DeathEffect : MonoBehaviour
 {
@@ -11,6 +12,7 @@ public class DeathEffect : MonoBehaviour
     void Start()
     {
         StartCoroutine(GrowEffect());
+        GetComponent<CinemachineImpulseSource>().GenerateImpulse();
     }
 
     IEnumerator GrowEffect() {

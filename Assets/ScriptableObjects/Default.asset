@@ -26,3 +26,6 @@ MonoBehaviour:
   doubleJumpCharges: 1
   coyoteTime: 0.1
   jumpBufferTime: 0.08
+  waterDrawBufferTime: 0.15
+  waterDrawDuration: 2
+  deathMask: {fileID: 3178744580586768386, guid: 6402f72152a34294ab24ccc1a15e3bca, type: 3}

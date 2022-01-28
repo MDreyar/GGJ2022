@@ -20,6 +20,11 @@ public class PlayerGroundedState : PlayerState
         }else if(player.LastOnGroundTime <= 0) {
             stateMachine.ChangeState(player.airState);
         }
+
+        if (player.Input.Default.SidewaysMovement.inProgress)
+            player.animator.Play("Run");
+        else
+            player.animator.Play("Idle");
     }
 
     public override void PhysicsUpdate() {

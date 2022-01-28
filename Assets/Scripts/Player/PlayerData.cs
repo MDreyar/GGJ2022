@@ -24,4 +24,9 @@ public class PlayerData : ScriptableObject
     public int doubleJumpCharges;
     public float coyoteTime;
     public float jumpBufferTime;
+
+    [Header("Abilities")]
+    public float waterDrawBufferTime;
+    public float waterDrawDuration;
+    public GameObject deathMask;
 }

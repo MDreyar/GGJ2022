@@ -10,6 +10,7 @@ public class PlayerJumpState : PlayerState
         base.Enter();
 
         player.Jump();
+        player.animator.Play("Jump Up");
     }
 
     public override void LogicUpdate() {
