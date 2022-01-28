@@ -17,7 +17,7 @@ public class PlayerState {
 
     public virtual void Enter() {
         ExitingState = false;
-        Debug.Log("Entering state " + this.ToString());
+       // Debug.Log("Entering state " + this.ToString());
     }
 
     public virtual void Exit() {

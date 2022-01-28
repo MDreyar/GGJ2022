@@ -5,6 +5,7 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour {
     [SerializeField] PlayerData data;
+    [SerializeField] GameObject KillMask;
     public InputActions Input { get; private set; }
 
     public Rigidbody2D rb;
@@ -20,7 +21,6 @@ public class PlayerController : MonoBehaviour {
 
     public float LastOnGroundTime { get; private set; }
     public float LastPressedJumpTime { get; private set; }
-    public int DoubleJumpCharges { get; private set; }
 
     [SerializeField] Transform groundCheckPoint;
     [SerializeField] Vector2 groundCheckSize;
@@ -43,10 +43,12 @@ public class PlayerController : MonoBehaviour {
     #region Basic Unity updates
     private void OnEnable() {
         Input.Default.Jump.performed += OnJump;
+        Input.Default.Kill.performed += OnKill;
         Input.Default.Enable();
     }
     private void OnDisable() {
         Input.Default.Jump.performed -= OnJump;
+        Input.Default.Kill.performed -= OnKill;
         Input.Default.Disable();
     }
 
@@ -72,6 +74,10 @@ public class PlayerController : MonoBehaviour {
 
     private void OnJump(InputAction.CallbackContext context) {
         LastPressedJumpTime = data.jumpBufferTime;
+    }
+
+    private void OnKill(InputAction.CallbackContext context) {
+        Instantiate(KillMask, rb.position, Quaternion.identity);
     }
 
     #region Movement

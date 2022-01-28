@@ -44,6 +44,15 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Kill"",
+                    ""type"": ""Button"",
+                    ""id"": ""9afe0199-38c4-47a5-a456-7d8c961f48b8"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -156,6 +165,28 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
                     ""action"": ""Jump"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""559cdb14-f2d3-47d8-92b0-421978da5d95"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Mouse and Keyboard"",
+                    ""action"": ""Kill"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ef9719d3-a393-454e-9f07-06fd4cc80242"",
+                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Controller"",
+                    ""action"": ""Kill"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -189,6 +220,7 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
         m_Default = asset.FindActionMap("Default", throwIfNotFound: true);
         m_Default_SidewaysMovement = m_Default.FindAction("Sideways Movement", throwIfNotFound: true);
         m_Default_Jump = m_Default.FindAction("Jump", throwIfNotFound: true);
+        m_Default_Kill = m_Default.FindAction("Kill", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -250,12 +282,14 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
     private IDefaultActions m_DefaultActionsCallbackInterface;
     private readonly InputAction m_Default_SidewaysMovement;
     private readonly InputAction m_Default_Jump;
+    private readonly InputAction m_Default_Kill;
     public struct DefaultActions
     {
         private @InputActions m_Wrapper;
         public DefaultActions(@InputActions wrapper) { m_Wrapper = wrapper; }
         public InputAction @SidewaysMovement => m_Wrapper.m_Default_SidewaysMovement;
         public InputAction @Jump => m_Wrapper.m_Default_Jump;
+        public InputAction @Kill => m_Wrapper.m_Default_Kill;
         public InputActionMap Get() { return m_Wrapper.m_Default; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -271,6 +305,9 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
                 @Jump.started -= m_Wrapper.m_DefaultActionsCallbackInterface.OnJump;
                 @Jump.performed -= m_Wrapper.m_DefaultActionsCallbackInterface.OnJump;
                 @Jump.canceled -= m_Wrapper.m_DefaultActionsCallbackInterface.OnJump;
+                @Kill.started -= m_Wrapper.m_DefaultActionsCallbackInterface.OnKill;
+                @Kill.performed -= m_Wrapper.m_DefaultActionsCallbackInterface.OnKill;
+                @Kill.canceled -= m_Wrapper.m_DefaultActionsCallbackInterface.OnKill;
             }
             m_Wrapper.m_DefaultActionsCallbackInterface = instance;
             if (instance != null)
@@ -281,6 +318,9 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
                 @Jump.started += instance.OnJump;
                 @Jump.performed += instance.OnJump;
                 @Jump.canceled += instance.OnJump;
+                @Kill.started += instance.OnKill;
+                @Kill.performed += instance.OnKill;
+                @Kill.canceled += instance.OnKill;
             }
         }
     }
@@ -307,5 +347,6 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
     {
         void OnSidewaysMovement(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
+        void OnKill(InputAction.CallbackContext context);
     }
 }
