@@ -21,7 +21,7 @@ MonoBehaviour:
   runAccelerationInAir: 0.65
   runDecelerationInAir: 0.65
   runStopPower: 1.23
-  jumpForce: 10
+  jumpForce: 11
   jumpCutMultiplier: 0.5
   doubleJumpCharges: 1
   coyoteTime: 0.1
