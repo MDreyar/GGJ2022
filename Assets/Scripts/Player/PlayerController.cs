@@ -8,6 +8,7 @@ public class PlayerController : MonoBehaviour {
     [SerializeField] Transform WaterBlobSpawnLoc;
     [SerializeField] IntEventChannelSO WaterPowerChanged;
     [SerializeField] PlayerStateChannelSO PlayerStateChannel;
+    [SerializeField] VoidEventChannelSO NewDeathMaskChannel;
 
     public InputActions Input { get; private set; }
     public Rigidbody2D rb { get; private set; }
@@ -52,7 +53,7 @@ public class PlayerController : MonoBehaviour {
         runState = new PlayerRunState(this, stateMachine, data);
         jumpState = new PlayerJumpState(this, stateMachine, data);
         airState = new PlayerInAirState(this, stateMachine, data);
-        waterDrawState = new PlayerWaterDrawState(this, stateMachine, data);
+        waterDrawState = new PlayerWaterDrawState(this, stateMachine, data, NewDeathMaskChannel);
         #endregion
     }
 

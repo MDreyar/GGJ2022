@@ -2,9 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerWaterDrawState : PlayerState
-{
-    public PlayerWaterDrawState(PlayerController player, StateMachine stateMachine, PlayerData data) : base(player, stateMachine, data) { }
+public class PlayerWaterDrawState : PlayerState {
+    VoidEventChannelSO newDeathMaskChannel;
+
+    public PlayerWaterDrawState(PlayerController player, StateMachine stateMachine, PlayerData data, VoidEventChannelSO newDeathMaskChannel) : base(player, stateMachine, data) {
+        this.newDeathMaskChannel = newDeathMaskChannel;
+    }
 
     float enterTime;
 
@@ -13,6 +16,7 @@ public class PlayerWaterDrawState : PlayerState
         enterTime = Time.time;
 
         GameObject.Instantiate(data.deathMaskprefab, player.rb.position, Quaternion.identity);
+        newDeathMaskChannel.RaiseEvent();
     }
 
     public override void Exit() {
@@ -24,7 +28,7 @@ public class PlayerWaterDrawState : PlayerState
     public override void LogicUpdate() {
         base.LogicUpdate();
 
-        if(Time.time >= enterTime + data.waterDrawDuration) {
+        if (Time.time >= enterTime + data.waterDrawDuration) {
             stateMachine.ChangeState(player.idleState);
         }
     }

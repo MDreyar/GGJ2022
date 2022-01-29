@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "Event channels/Player statemachine events")]
+[CreateAssetMenu(menuName = "Event Channels/Player Statemachine Events")]
 public class PlayerStateChannelSO : ScriptableObject
 {
     public event Action<PlayerState> ExitingState;
