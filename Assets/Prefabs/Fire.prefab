@@ -4887,6 +4887,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 95151991928b1f646ac61c20da7e1b27, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  createFireChannel: {fileID: 11400000, guid: ac39304ca605fb442b8cec722a1814ad, type: 2}
+  destroyFireChannel: {fileID: 11400000, guid: 0723da4618539d64d825f620f568133a, type: 2}
 --- !u!50 &1351752291
 Rigidbody2D:
   serializedVersion: 4

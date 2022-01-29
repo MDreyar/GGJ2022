@@ -99,7 +99,7 @@ MonoBehaviour:
   - {fileID: 3296205161956180299}
   StringsBanks:
   - {fileID: 6978902568971537820}
-  cacheTime: 637790869257637823
+  cacheTime: 637790948531794056
   cacheVersion: 10
 --- !u!114 &3296205161956180299
 MonoBehaviour:
@@ -116,10 +116,10 @@ MonoBehaviour:
   Path: ../GGJ2022/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 637790869257627813
+  lastModified: 637790948531774043
   FileSizes:
   - Name: Desktop
-    Value: 4622688
+    Value: 4622816
   Exists: 1
 --- !u!114 &3384225425187515838
 MonoBehaviour:
@@ -143,7 +143,7 @@ MonoBehaviour:
   - {fileID: 3296205161956180299}
   IsStream: 1
   Is3D: 0
-  IsOneShot: 1
+  IsOneShot: 0
   Parameters:
   - {fileID: -175990788864490202}
   - {fileID: -2474963642458355550}
@@ -165,7 +165,7 @@ MonoBehaviour:
   Path: ../GGJ2022/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 637790869257637823
+  lastModified: 637790948531794056
   FileSizes:
   - Name: Desktop
     Value: 956

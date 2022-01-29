@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -9,6 +8,7 @@ public class PlayerController : MonoBehaviour {
     [SerializeField] IntEventChannelSO WaterPowerChanged;
     [SerializeField] PlayerStateChannelSO PlayerStateChannel;
     [SerializeField] VoidEventChannelSO NewDeathMaskChannel;
+    [SerializeField] FloatEventChannelSO FireProximityChannel;
 
     public InputActions Input { get; private set; }
     public Rigidbody2D rb { get; private set; }
@@ -96,6 +96,8 @@ public class PlayerController : MonoBehaviour {
         }
 
         stateMachine.CurrentState.LogicUpdate();
+        var allFireInLevel = FindObjectsOfType<Fire>().Select(fire => Vector2.Distance(this.rb.position, fire.transform.position)).Min();
+        FireProximityChannel.RaiseEvent(allFireInLevel);
     }
 
     private void FixedUpdate() {
