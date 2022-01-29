@@ -7,6 +7,7 @@ public class PlayerController : MonoBehaviour {
     [SerializeField] PlayerData data;
     [SerializeField] Transform WaterBlobSpawnLoc;
     [SerializeField] IntEventChannelSO WaterPowerChanged;
+    [SerializeField] PlayerStateChannelSO PlayerStateChannel;
 
     public InputActions Input { get; private set; }
     public Rigidbody2D rb { get; private set; }
@@ -70,7 +71,7 @@ public class PlayerController : MonoBehaviour {
     }
 
     private void Start() {
-        stateMachine.Initialize(this, idleState);
+        stateMachine.Initialize(this, idleState, PlayerStateChannel);
         WaterPower = data.startingWater;
         SetGravityScale(data.gravityScale);
     }
