@@ -31,6 +31,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "WaterBlob",
+                    "type": "Button",
+                    "id": "26d88bca-bbc3-485e-88de-fe7fa9109016",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -147,7 +156,7 @@
                 {
                     "name": "",
                     "id": "559cdb14-f2d3-47d8-92b0-421978da5d95",
-                    "path": "<Keyboard>/e",
+                    "path": "<Keyboard>/q",
                     "interactions": "",
                     "processors": "",
                     "groups": "Mouse and Keyboard",
@@ -158,11 +167,33 @@
                 {
                     "name": "",
                     "id": "ef9719d3-a393-454e-9f07-06fd4cc80242",
-                    "path": "<Gamepad>/buttonEast",
+                    "path": "<Gamepad>/buttonWest",
                     "interactions": "",
                     "processors": "",
                     "groups": "Controller",
                     "action": "Kill",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "b20f66ca-de9c-4189-b6cf-f889d8566269",
+                    "path": "<Keyboard>/e",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Mouse and Keyboard",
+                    "action": "WaterBlob",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "be4f4086-95d2-4f1f-ab85-9acb64889fe7",
+                    "path": "<Gamepad>/buttonEast",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Controller",
+                    "action": "WaterBlob",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

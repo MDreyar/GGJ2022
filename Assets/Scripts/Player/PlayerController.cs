@@ -5,11 +5,12 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour {
     [SerializeField] PlayerData data;
+    [SerializeField] Transform WaterBlobSpawnLoc;
+    [SerializeField] WaterBlob WaterBlobPrefab;
 
     public InputActions Input { get; private set; }
-    public Rigidbody2D rb;
-    public Animator animator;
-    private SpriteRenderer renderer;
+    public Rigidbody2D rb { get; private set; }
+    public Animator animator { get; private set; }
 
     #region State machine
     public string CurrentState;
@@ -33,7 +34,6 @@ public class PlayerController : MonoBehaviour {
         Input = new InputActions();
 
         rb = GetComponent<Rigidbody2D>();
-        renderer = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
 
         #region State machine
@@ -50,11 +50,13 @@ public class PlayerController : MonoBehaviour {
     private void OnEnable() {
         Input.Default.Jump.performed += OnJump;
         Input.Default.Kill.performed += OnKill;
+        Input.Default.WaterBlob.performed += OnWaterBlob;
         Input.Default.Enable();
     }
     private void OnDisable() {
         Input.Default.Jump.performed -= OnJump;
         Input.Default.Kill.performed -= OnKill;
+        Input.Default.WaterBlob.performed -= OnWaterBlob;
         Input.Default.Disable();
     }
 
@@ -72,10 +74,13 @@ public class PlayerController : MonoBehaviour {
             LastOnGroundTime = data.coyoteTime;
 
         if(Mathf.Abs(rb.velocity.x) >= 0.01f) {
-            if (rb.velocity.x < 0)
-                renderer.flipX = true;
-            else
-                renderer.flipX = false;
+            if (rb.velocity.x < 0) {
+                transform.localScale = new Vector3(-1, 1, 1);
+                WaterBlobSpawnLoc.rotation = Quaternion.Euler(0, 180, 0);
+            } else {
+                transform.localScale = Vector3.one;
+                WaterBlobSpawnLoc.rotation = Quaternion.identity;
+            }
         }
 
         stateMachine.CurrentState.LogicUpdate();
@@ -93,6 +98,11 @@ public class PlayerController : MonoBehaviour {
 
     private void OnKill(InputAction.CallbackContext context) {
         LastPressedWaterDrawTime = data.waterDrawBufferTime;
+    }
+
+    private void OnWaterBlob(InputAction.CallbackContext context) {
+        var waterBlob = Instantiate(WaterBlobPrefab, WaterBlobSpawnLoc.position, WaterBlobSpawnLoc.rotation);
+        waterBlob.Launch(new Vector2(rb.velocity.x, 0), transform.localScale.x < 0);
     }
     #endregion
 

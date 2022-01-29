@@ -53,6 +53,15 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""WaterBlob"",
+                    ""type"": ""Button"",
+                    ""id"": ""26d88bca-bbc3-485e-88de-fe7fa9109016"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -169,7 +178,7 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""559cdb14-f2d3-47d8-92b0-421978da5d95"",
-                    ""path"": ""<Keyboard>/e"",
+                    ""path"": ""<Keyboard>/q"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Mouse and Keyboard"",
@@ -180,11 +189,33 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""ef9719d3-a393-454e-9f07-06fd4cc80242"",
-                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""path"": ""<Gamepad>/buttonWest"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Controller"",
                     ""action"": ""Kill"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b20f66ca-de9c-4189-b6cf-f889d8566269"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Mouse and Keyboard"",
+                    ""action"": ""WaterBlob"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""be4f4086-95d2-4f1f-ab85-9acb64889fe7"",
+                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Controller"",
+                    ""action"": ""WaterBlob"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -221,6 +252,7 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
         m_Default_SidewaysMovement = m_Default.FindAction("Sideways Movement", throwIfNotFound: true);
         m_Default_Jump = m_Default.FindAction("Jump", throwIfNotFound: true);
         m_Default_Kill = m_Default.FindAction("Kill", throwIfNotFound: true);
+        m_Default_WaterBlob = m_Default.FindAction("WaterBlob", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -283,6 +315,7 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
     private readonly InputAction m_Default_SidewaysMovement;
     private readonly InputAction m_Default_Jump;
     private readonly InputAction m_Default_Kill;
+    private readonly InputAction m_Default_WaterBlob;
     public struct DefaultActions
     {
         private @InputActions m_Wrapper;
@@ -290,6 +323,7 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
         public InputAction @SidewaysMovement => m_Wrapper.m_Default_SidewaysMovement;
         public InputAction @Jump => m_Wrapper.m_Default_Jump;
         public InputAction @Kill => m_Wrapper.m_Default_Kill;
+        public InputAction @WaterBlob => m_Wrapper.m_Default_WaterBlob;
         public InputActionMap Get() { return m_Wrapper.m_Default; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -308,6 +342,9 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
                 @Kill.started -= m_Wrapper.m_DefaultActionsCallbackInterface.OnKill;
                 @Kill.performed -= m_Wrapper.m_DefaultActionsCallbackInterface.OnKill;
                 @Kill.canceled -= m_Wrapper.m_DefaultActionsCallbackInterface.OnKill;
+                @WaterBlob.started -= m_Wrapper.m_DefaultActionsCallbackInterface.OnWaterBlob;
+                @WaterBlob.performed -= m_Wrapper.m_DefaultActionsCallbackInterface.OnWaterBlob;
+                @WaterBlob.canceled -= m_Wrapper.m_DefaultActionsCallbackInterface.OnWaterBlob;
             }
             m_Wrapper.m_DefaultActionsCallbackInterface = instance;
             if (instance != null)
@@ -321,6 +358,9 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
                 @Kill.started += instance.OnKill;
                 @Kill.performed += instance.OnKill;
                 @Kill.canceled += instance.OnKill;
+                @WaterBlob.started += instance.OnWaterBlob;
+                @WaterBlob.performed += instance.OnWaterBlob;
+                @WaterBlob.canceled += instance.OnWaterBlob;
             }
         }
     }
@@ -348,5 +388,6 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
         void OnSidewaysMovement(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
         void OnKill(InputAction.CallbackContext context);
+        void OnWaterBlob(InputAction.CallbackContext context);
     }
 }
