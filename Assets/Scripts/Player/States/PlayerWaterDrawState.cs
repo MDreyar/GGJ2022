@@ -12,7 +12,13 @@ public class PlayerWaterDrawState : PlayerState
         base.Enter();
         enterTime = Time.time;
 
-        GameObject.Instantiate(data.deathMask, player.rb.position, Quaternion.identity);
+        GameObject.Instantiate(data.deathMaskprefab, player.rb.position, Quaternion.identity);
+    }
+
+    public override void Exit() {
+        base.Exit();
+
+        player.WaterPower = Mathf.Min(player.WaterPower + data.waterDrawWaterGain, data.waterCapacity);
     }
 
     public override void LogicUpdate() {

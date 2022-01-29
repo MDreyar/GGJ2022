@@ -28,9 +28,10 @@ public class Fire : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision) {
         if (collision.gameObject.layer == LayerMask.NameToLayer("Attack")) {
             killed = true;
-            GetComponent<ParticleSystem>().Stop();
             target = 0;
+            GetComponent<ParticleSystem>().Stop();
             Destroy(gameObject, 2);
+            Destroy(collision.gameObject);
         }
     }
 }

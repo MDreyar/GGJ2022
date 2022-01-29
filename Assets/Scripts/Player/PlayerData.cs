@@ -26,7 +26,12 @@ public class PlayerData : ScriptableObject
     public float jumpBufferTime;
 
     [Header("Abilities")]
+    public int waterCapacity;
+    public int startingWater;
     public float waterDrawBufferTime;
     public float waterDrawDuration;
-    public GameObject deathMask;
+    public int waterDrawWaterGain;
+    public GameObject deathMaskprefab;
+    public int waterBallCost;
+    public GameObject waterBallPrefab;
 }

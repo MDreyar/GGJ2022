@@ -6,7 +6,7 @@ using UnityEngine.InputSystem;
 public class PlayerController : MonoBehaviour {
     [SerializeField] PlayerData data;
     [SerializeField] Transform WaterBlobSpawnLoc;
-    [SerializeField] WaterBlob WaterBlobPrefab;
+    [SerializeField] IntEventChannelSO WaterPowerChanged;
 
     public InputActions Input { get; private set; }
     public Rigidbody2D rb { get; private set; }
@@ -25,6 +25,15 @@ public class PlayerController : MonoBehaviour {
     public float LastOnGroundTime { get; private set; }
     public float LastPressedJumpTime { get; private set; }
     public float LastPressedWaterDrawTime { get; private set; }
+
+    private int _waterPower;
+    public int WaterPower {
+        get { return _waterPower; }
+        set {
+            _waterPower = value;
+            WaterPowerChanged.RaiseEvent(_waterPower);
+        }
+    }
 
     [SerializeField] Transform groundCheckPoint;
     [SerializeField] Vector2 groundCheckSize;
@@ -62,6 +71,7 @@ public class PlayerController : MonoBehaviour {
 
     private void Start() {
         stateMachine.Initialize(this, idleState);
+        WaterPower = data.startingWater;
         SetGravityScale(data.gravityScale);
     }
 
@@ -73,7 +83,7 @@ public class PlayerController : MonoBehaviour {
         if (Physics2D.OverlapBox(groundCheckPoint.position, groundCheckSize, 0, groundLayer))
             LastOnGroundTime = data.coyoteTime;
 
-        if(Mathf.Abs(rb.velocity.x) >= 0.01f) {
+        if (Mathf.Abs(rb.velocity.x) >= 0.01f) {
             if (rb.velocity.x < 0) {
                 transform.localScale = new Vector3(-1, 1, 1);
                 WaterBlobSpawnLoc.rotation = Quaternion.Euler(0, 180, 0);
@@ -101,8 +111,11 @@ public class PlayerController : MonoBehaviour {
     }
 
     private void OnWaterBlob(InputAction.CallbackContext context) {
-        var waterBlob = Instantiate(WaterBlobPrefab, WaterBlobSpawnLoc.position, WaterBlobSpawnLoc.rotation);
-        waterBlob.Launch(new Vector2(rb.velocity.x, 0), transform.localScale.x < 0);
+        if (WaterPower >= data.waterBallCost) {
+            WaterPower -= data.waterBallCost;
+            var waterBlob = Instantiate(data.waterBallPrefab, WaterBlobSpawnLoc.position, WaterBlobSpawnLoc.rotation).GetComponent<WaterBlob>();
+            waterBlob.Launch(new Vector2(rb.velocity.x, 0), transform.localScale.x < 0);
+        }
     }
     #endregion
 

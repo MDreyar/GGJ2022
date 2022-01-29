@@ -26,6 +26,11 @@ MonoBehaviour:
   doubleJumpCharges: 1
   coyoteTime: 0.1
   jumpBufferTime: 0.08
+  waterCapacity: 10
+  startingWater: 0
   waterDrawBufferTime: 0.15
   waterDrawDuration: 2
-  deathMask: {fileID: 3178744580586768386, guid: 6402f72152a34294ab24ccc1a15e3bca, type: 3}
+  waterDrawWaterGain: 10
+  deathMaskprefab: {fileID: 3178744580586768386, guid: 6402f72152a34294ab24ccc1a15e3bca, type: 3}
+  waterBallCost: 2
+  waterBallPrefab: {fileID: 157480911440876198, guid: 3ef8377700402a448bd1dc33f8b52dc9, type: 3}
