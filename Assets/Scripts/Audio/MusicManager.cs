@@ -27,6 +27,11 @@ public class MusicManager : MonoBehaviour {
         fireProximity.OnEventRaised += FireProximityLevel;
         instance = RuntimeManager.CreateInstance(fmodEvent);
         instance.start();
+        instance.setParameterByName("Moist Level", 1);
+    }
+
+    private void OnDestroy() {
+        instance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
     }
 
     void SetMoistLevel() {

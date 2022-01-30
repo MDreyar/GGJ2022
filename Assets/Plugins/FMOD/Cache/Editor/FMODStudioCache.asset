@@ -19,7 +19,7 @@ MonoBehaviour:
     Data3: -1652037999
     Data4: 1424216264
   Banks:
-  - {fileID: 2012971163919559513}
+  - {fileID: 8716669902478095878}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -88,20 +88,20 @@ MonoBehaviour:
   m_Name: FMODStudioCache
   m_EditorClassIdentifier: 
   EditorBanks:
-  - {fileID: 3951964804204864552}
-  - {fileID: 2012971163919559513}
+  - {fileID: 1837200613944947111}
+  - {fileID: 8716669902478095878}
   EditorEvents:
   - {fileID: 8113505688934891567}
   - {fileID: -4159782639674568488}
   - {fileID: 3384225425187515838}
   EditorParameters: []
   MasterBanks:
-  - {fileID: 2012971163919559513}
+  - {fileID: 8716669902478095878}
   StringsBanks:
-  - {fileID: 3951964804204864552}
-  cacheTime: 637790948531794056
+  - {fileID: 1837200613944947111}
+  cacheTime: 637791484487020828
   cacheVersion: 10
---- !u!114 &2012971163919559513
+--- !u!114 &1837200613944947111
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -111,15 +111,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
-  m_Name: bank:/Master.bank
+  m_Name: bank:/Master.strings.bank
   m_EditorClassIdentifier: 
-  Path: ../GGJ2022/Build/Desktop/Master.bank
-  Name: Master
-  StudioPath: bank:/Master
-  lastModified: 637790948531774043
+  Path: Assets/Art/Audio/Build/Desktop/Master.strings.bank
+  Name: Master.strings
+  StudioPath: bank:/Master.strings
+  lastModified: 637791484487020828
   FileSizes:
   - Name: Desktop
-    Value: 4622816
+    Value: 956
   Exists: 1
 --- !u!114 &3384225425187515838
 MonoBehaviour:
@@ -140,7 +140,7 @@ MonoBehaviour:
     Data3: -746472783
     Data4: -333571824
   Banks:
-  - {fileID: 2012971163919559513}
+  - {fileID: 8716669902478095878}
   IsStream: 1
   Is3D: 0
   IsOneShot: 0
@@ -150,26 +150,6 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 57600
---- !u!114 &3951964804204864552
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
-  m_Name: bank:/Master.strings.bank
-  m_EditorClassIdentifier: 
-  Path: ../GGJ2022/Build/Desktop/Master.strings.bank
-  Name: Master.strings
-  StudioPath: bank:/Master.strings
-  lastModified: 637790948531794056
-  FileSizes:
-  - Name: Desktop
-    Value: 956
-  Exists: 1
 --- !u!114 &8113505688934891567
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -189,7 +169,7 @@ MonoBehaviour:
     Data3: -1379964750
     Data4: 14830959
   Banks:
-  - {fileID: 2012971163919559513}
+  - {fileID: 8716669902478095878}
   IsStream: 0
   Is3D: 0
   IsOneShot: 0
@@ -197,3 +177,23 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 9192
+--- !u!114 &8716669902478095878
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master.bank
+  m_EditorClassIdentifier: 
+  Path: Assets/Art/Audio/Build/Desktop/Master.bank
+  Name: Master
+  StudioPath: bank:/Master
+  lastModified: 637791484487000890
+  FileSizes:
+  - Name: Desktop
+    Value: 4622816
+  Exists: 1

@@ -11,4 +11,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/The Actual Level.unity
     guid: bd25d1ff1d0194e408a2c97f8773084e
+  - enabled: 1
+    path: Assets/Scenes/DeathScreen.unity
+    guid: d3dcdb8a839b2804681255e23b130767
+  - enabled: 1
+    path: Assets/Scenes/WinScreen.unity
+    guid: 568de3bfbfc11024ba7b0a9bd0e8428c
   m_configObjects: {}

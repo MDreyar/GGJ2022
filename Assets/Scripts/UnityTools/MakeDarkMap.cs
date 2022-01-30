@@ -30,7 +30,7 @@ public class MakeDarkMap : MonoBehaviour
         // update renderers
         var renderers = darkMap.GetComponentsInChildren<SpriteRenderer>();
         foreach(var renderer in renderers) {
-            renderer.sortingOrder += 10;
+            renderer.sortingOrder += 50;
             renderer.maskInteraction = SpriteMaskInteraction.VisibleInsideMask;
 
             // update sprite with dark sprite

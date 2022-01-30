@@ -1,6 +1,7 @@
 using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour {
     [SerializeField] PlayerData data;
