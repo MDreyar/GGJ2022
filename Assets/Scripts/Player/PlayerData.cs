@@ -2,9 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "Player/Player Data")]
+[CreateAssetMenu(menuName = "Data/Player Data")]
 public class PlayerData : ScriptableObject
 {
+    [Header("Health")]
+    public float maxHealth;
+    public float damageFromFireParticle;
+    public float damageFromEnemyTouch;
+
     [Header("Gravity")]
     public float gravityScale;
     public float fallGravityMult;
@@ -22,6 +27,7 @@ public class PlayerData : ScriptableObject
     public float jumpForce;
     public float jumpCutMultiplier;
     public int doubleJumpCharges;
+    public int doubleJumpCost;
     public float coyoteTime;
     public float jumpBufferTime;
 

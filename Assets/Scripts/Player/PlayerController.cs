@@ -6,13 +6,15 @@ public class PlayerController : MonoBehaviour {
     [SerializeField] PlayerData data;
     [SerializeField] Transform WaterBlobSpawnLoc;
     [SerializeField] IntEventChannelSO WaterPowerChanged;
+    [SerializeField] FloatEventChannelSO HealthChanged;
     [SerializeField] PlayerStateChannelSO PlayerStateChannel;
     [SerializeField] VoidEventChannelSO NewDeathMaskChannel;
     [SerializeField] FloatEventChannelSO FireProximityChannel;
 
     public InputActions Input { get; private set; }
     public Rigidbody2D rb { get; private set; }
-    public Animator animator { get; private set; }
+    public Animator Animator { get; private set; }
+    public ParticleSystem ParticleSystem { get; private set; }
 
     #region State machine
     public string CurrentState;
@@ -37,6 +39,15 @@ public class PlayerController : MonoBehaviour {
         }
     }
 
+    private float _health;
+    public float Health {
+        get { return _health; }
+        set {
+            _health = value;
+            HealthChanged.RaiseEvent(_health);
+        }
+    }
+
     [SerializeField] Transform groundCheckPoint;
     [SerializeField] Vector2 groundCheckSize;
     [SerializeField] LayerMask groundLayer;
@@ -45,7 +56,8 @@ public class PlayerController : MonoBehaviour {
         Input = new InputActions();
 
         rb = GetComponent<Rigidbody2D>();
-        animator = GetComponent<Animator>();
+        Animator = GetComponent<Animator>();
+        ParticleSystem = GetComponentInChildren<ParticleSystem>();
 
         #region State machine
         stateMachine = new StateMachine();
@@ -74,6 +86,7 @@ public class PlayerController : MonoBehaviour {
     private void Start() {
         stateMachine.Initialize(this, idleState, PlayerStateChannel);
         WaterPower = data.startingWater;
+        Health = data.maxHealth;
         SetGravityScale(data.gravityScale);
     }
 
@@ -96,8 +109,8 @@ public class PlayerController : MonoBehaviour {
         }
 
         stateMachine.CurrentState.LogicUpdate();
-        var allFireInLevel = FindObjectsOfType<Fire>().Select(fire => Vector2.Distance(this.rb.position, fire.transform.position)).Min();
-        FireProximityChannel.RaiseEvent(allFireInLevel);
+        var fireProximity = FindObjectsOfType<Fire>().Select(fire => Vector2.Distance(this.rb.position, fire.transform.position)).DefaultIfEmpty().Min();
+        FireProximityChannel.RaiseEvent(fireProximity);
     }
 
     private void FixedUpdate() {
@@ -160,6 +173,18 @@ public class PlayerController : MonoBehaviour {
         rb.AddForce(Vector2.down * rb.velocity.y * data.jumpCutMultiplier, ForceMode2D.Impulse);
     }
     #endregion
+
+    private void OnParticleCollision(GameObject other) {
+        if (other.layer == LayerMask.NameToLayer("Fire")) {
+            Health -= data.damageFromFireParticle;
+        }
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision) {
+        if(collision.gameObject.layer == LayerMask.NameToLayer("Enemy")) {
+            Health -= data.damageFromEnemyTouch;
+        }
+    }
 
     private void OnDrawGizmos() {
         Gizmos.DrawCube(groundCheckPoint.position, groundCheckSize);

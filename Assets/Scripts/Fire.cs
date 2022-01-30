@@ -5,12 +5,14 @@ using UnityEngine.Experimental.Rendering.Universal;
 
 public class Fire : MonoBehaviour
 {
+    public Rigidbody2D rb;
     private new Light2D light;
     private float target;
     private bool killed;
 
     private void Awake() {
         light = GetComponent<Light2D>();
+        rb = GetComponent<Rigidbody2D>();
         target = 5;
     }
 
@@ -30,6 +32,7 @@ public class Fire : MonoBehaviour
             killed = true;
             target = 0;
             GetComponent<ParticleSystem>().Stop();
+            GetComponent<CircleCollider2D>().enabled = false;
             Destroy(gameObject, 2);
             Destroy(collision.gameObject);
         }

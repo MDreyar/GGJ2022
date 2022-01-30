@@ -22,9 +22,9 @@ public class PlayerGroundedState : PlayerState
         }
 
         if (player.Input.Default.SidewaysMovement.inProgress)
-            player.animator.Play("Run");
+            player.Animator.Play("Run");
         else
-            player.animator.Play("Idle");
+            player.Animator.Play("Idle");
     }
 
     public override void PhysicsUpdate() {

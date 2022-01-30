@@ -12,6 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d54a01448244f1b42ba372aefffd0971, type: 3}
   m_Name: Default
   m_EditorClassIdentifier: 
+  maxHealth: 100
+  damageFromFireParticle: 0.1
+  damageFromEnemyTouch: 20
   gravityScale: 1.1
   fallGravityMult: 2
   runMaxSpeed: 9.5
@@ -24,6 +27,7 @@ MonoBehaviour:
   jumpForce: 11
   jumpCutMultiplier: 0.5
   doubleJumpCharges: 1
+  doubleJumpCost: 1
   coyoteTime: 0.1
   jumpBufferTime: 0.08
   waterCapacity: 10

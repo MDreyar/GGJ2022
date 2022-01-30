@@ -19,6 +19,7 @@ public class WaterBlob : MonoBehaviour
     }
 
     private void OnCollisionEnter2D(Collision2D collision) {
-        Destroy(gameObject);
+        if(collision.gameObject.layer != LayerMask.NameToLayer("Fire"))
+            Destroy(gameObject);
     }
 }

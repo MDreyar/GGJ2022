@@ -11,7 +11,7 @@ public class PlayerInAirState : PlayerState {
     public override void Enter() {
         base.Enter();
 
-        player.animator.Play("Fall Down");
+        player.Animator.Play("Fall Down");
     }
 
     public override void Exit() {
@@ -31,9 +31,11 @@ public class PlayerInAirState : PlayerState {
             } else {
                 stateMachine.ChangeState(player.idleState);
             }
-        }else if(player.LastPressedJumpTime > 0 && DoubleJumpCharges > 0) {
+        }else if(player.LastPressedJumpTime > 0 && DoubleJumpCharges > 0 && player.WaterPower >= data.doubleJumpCost) {
             stateMachine.ChangeState(player.jumpState);
             DoubleJumpCharges--;
+            player.WaterPower -= data.doubleJumpCost;
+            player.ParticleSystem.Play();
         } 
         else if (player.rb.velocity.y < 0) {
             player.SetGravityScale(data.gravityScale * data.fallGravityMult);

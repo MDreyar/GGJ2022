@@ -10,7 +10,13 @@ public class PlayerJumpState : PlayerState
         base.Enter();
 
         player.Jump();
-        player.animator.Play("Jump Up");
+        player.Animator.Play("Jump Up");
+    }
+
+    public override void Exit() {
+        base.Exit();
+
+        player.ParticleSystem.Stop();
     }
 
     public override void LogicUpdate() {
