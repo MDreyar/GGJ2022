@@ -79,8 +79,8 @@ MonoBehaviour:
   SwitchSettingsMigration: 1
   HasSourceProject: 1
   HasPlatforms: 1
-  sourceProjectPath: ../GGJ2022/GGJ2022.fspro
-  sourceBankPath: ../GGJ2022/Build
+  sourceProjectPath: Assets/Art/Audio/GGJ2022.fspro
+  sourceBankPath: Assets/Art/Audio/Build
   SourceBankPathUnformatted: 
   BankRefreshCooldown: 1
   ShowBankRefreshWindow: 0
