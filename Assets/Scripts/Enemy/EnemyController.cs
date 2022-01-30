@@ -72,13 +72,13 @@ public class EnemyController : MonoBehaviour
         var discriminant = b * b - g * g * (playerOffset.x * playerOffset.x + playerOffset.y * playerOffset.y);
 
         if (discriminant < 0) {
-            Debug.Log("No firing solution");
+           // Debug.Log("No firing solution");
             return playerOffset.normalized * data.fireLaunchForce;
         }
 
         var discRoot = Mathf.Sqrt(discriminant);
 
-        Debug.Log("Fireing solution got!");
+        //Debug.Log("Fireing solution got!");
         var T = Mathf.Sqrt((b - discRoot) * 2 / (g * g));
         return new Vector2(playerOffset.x / T, playerOffset.y / T + T * g / 2);
     }

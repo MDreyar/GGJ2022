@@ -126,13 +126,13 @@ MonoBehaviour:
   m_HasRenderer: 1
   m_UseRendererSilhouette: 1
   m_CastsShadows: 1
-  m_SelfShadows: 0
+  m_SelfShadows: 1
   m_ApplyToSortingLayers: 6ba13ca200000000
   m_ShapePath:
   - {x: -2.5, y: -0.5, z: 0}
   - {x: 2.5, y: -0.5, z: 0}
-  - {x: 2.5, y: 0.2, z: 0}
-  - {x: -2.5, y: 0.2, z: 0}
-  m_ShapePathHash: 1566402829
+  - {x: 2.6, y: 0.2, z: 0}
+  - {x: -2.6, y: 0.2, z: 0}
+  m_ShapePathHash: -265667795
   m_Mesh: {fileID: 0}
-  m_InstanceId: -197880
+  m_InstanceId: 66596
