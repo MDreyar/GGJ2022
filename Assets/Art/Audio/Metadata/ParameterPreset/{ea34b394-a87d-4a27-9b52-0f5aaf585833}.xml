@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="ParameterPreset" id="{ea34b394-a87d-4a27-9b52-0f5aaf585833}">
+		<property name="name">
+			<value>Fire Proximity</value>
+		</property>
+		<relationship name="folder">
+			<destination>{ba5c775d-c5a9-4a1b-b909-526b7711bbbb}</destination>
+		</relationship>
+		<relationship name="parameter">
+			<destination>{44a26cab-d8e1-4e7d-97df-91e4509735eb}</destination>
+		</relationship>
+	</object>
+	<object class="GameParameter" id="{44a26cab-d8e1-4e7d-97df-91e4509735eb}">
+		<property name="initialValue">
+			<value>0</value>
+		</property>
+	</object>
+</objects>

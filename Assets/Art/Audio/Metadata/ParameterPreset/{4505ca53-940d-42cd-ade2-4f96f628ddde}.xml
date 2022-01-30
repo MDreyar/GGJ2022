@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="ParameterPreset" id="{4505ca53-940d-42cd-ade2-4f96f628ddde}">
+		<property name="name">
+			<value>Moist Level</value>
+		</property>
+		<relationship name="folder">
+			<destination>{ba5c775d-c5a9-4a1b-b909-526b7711bbbb}</destination>
+		</relationship>
+		<relationship name="parameter">
+			<destination>{855c2c90-0284-43d0-a1a4-0cc5014bf476}</destination>
+		</relationship>
+	</object>
+	<object class="GameParameter" id="{855c2c90-0284-43d0-a1a4-0cc5014bf476}">
+		<property name="initialValue">
+			<value>1</value>
+		</property>
+	</object>
+</objects>
