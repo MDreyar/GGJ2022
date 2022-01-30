@@ -41,7 +41,7 @@ public class MusicManager : MonoBehaviour {
         }
         instance.getParameterByName("Fire Proximity", out var fireProximity);
         //instance.setParameterByName("Fire Proximity", (1/proximity).Map(0,0.5f,0,1f));
-        why = (1 / proximity).Map(0, 0.5f, 0, 1f);
+        why = proximity == 0 ? 0 : (1 / proximity).Map(0, 0.5f, 0, 1f);
         //StartCoroutine(MathHelper.SmoothTowards(fireProximity, why, 1f, newFireProximity => instance.setParameterByName("Fire Proximity", newFireProximity)));
         instance.setParameterByName("Fire Proximity", Mathf.MoveTowards(fireProximity, why, 0.1f * Time.deltaTime));
     }

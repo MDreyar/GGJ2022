@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Experimental.Rendering.Universal;
 
 public class EnemyController : MonoBehaviour
 {
@@ -10,6 +11,9 @@ public class EnemyController : MonoBehaviour
     [SerializeField] float currentHealth;
 
     new SpriteRenderer renderer;
+    private new Light2D light;
+    private float lightTarget;
+    private bool killed;
 
     float TimeToLaunchFire;
     PlayerController player;
@@ -17,6 +21,8 @@ public class EnemyController : MonoBehaviour
 
     private void Awake() {
         renderer = GetComponent<SpriteRenderer>();
+        light = GetComponent<Light2D>();
+        killed = false;
     }
 
     private void Start() {
@@ -29,8 +35,14 @@ public class EnemyController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(currentHealth <= 0) {
-            Destroy(gameObject);
+        light.intensity = Mathf.MoveTowards(light.intensity, lightTarget, Time.deltaTime);
+
+        if (currentHealth <= 0) {
+            killed = true;
+            lightTarget = 0;
+            renderer.enabled = false;
+            GetComponent<CapsuleCollider2D>().enabled = false;
+            Destroy(gameObject, 0);
         }
 
         if (renderer.isVisible) {
@@ -39,6 +51,11 @@ public class EnemyController : MonoBehaviour
             if (TimeToLaunchFire <= 0)
                 LaunchFire();
         }
+    }
+
+    void FixedUpdate() {
+        if (!killed)
+            lightTarget = Random.Range(1.1f, 1.7f);
     }
 
     private void LaunchFire() {
