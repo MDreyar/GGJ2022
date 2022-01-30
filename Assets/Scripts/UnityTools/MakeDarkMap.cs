@@ -7,7 +7,7 @@ public class MakeDarkMap : MonoBehaviour
 {
     const string mapName = "Map";
     const string darkMapName = "Map_Dark";
-    const string darkTextureSuffix = "_dark";
+    const string darkTextureSuffix = " M";
 
     [UnityEditor.MenuItem("GGJ/DuplicateMap")]
     public static void duplicateMap() {
@@ -30,7 +30,7 @@ public class MakeDarkMap : MonoBehaviour
         // update renderers
         var renderers = darkMap.GetComponentsInChildren<SpriteRenderer>();
         foreach(var renderer in renderers) {
-            renderer.sortingOrder = 1;
+            renderer.sortingOrder += 10;
             renderer.maskInteraction = SpriteMaskInteraction.VisibleInsideMask;
 
             // update sprite with dark sprite
